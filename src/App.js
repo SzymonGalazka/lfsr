@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Main from './Components/Main';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+    <div className='App'>
+      <Main />
+      <footer className='App-footer'>
+        <span>Szymon Galazka 2020</span>
         <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          className='App-link'
+          href='https://github.com/SzymonGalazka/lfsr'
+          target='_blank'
+          rel='noopener noreferrer'
         >
-          Learn React
+          Repository link
         </a>
-      </header>
+      </footer>
     </div>
   );
 }
