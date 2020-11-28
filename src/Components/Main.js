@@ -10,8 +10,14 @@ const Main = () => {
   ];
   return (
     <div className='main'>
-      <div>LSFR</div>
-      <LFSR matrix={matrix} input={[0, 0, 1]} />
+      <h2>Linear-feedback shift register</h2>
+      <p>
+        Companion matrix:
+        {matrix.map((q) => (
+          <div className='matrix-item'>{q}</div>
+        ))}
+      </p>
+      <LFSR matrix={matrix} input={[1, 0, 0]} />
     </div>
   );
 };
