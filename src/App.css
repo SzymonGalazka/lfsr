@@ -7,8 +7,11 @@
   display: flex;
   padding: 2em 1em;
   justify-content: space-around;
+  position: sticky;
+  bottom: 0;
   font-size: 1em;
-  background-color: #e0e9fa;
+  background-color: #eee;
+  box-shadow: 0 1px #ccc inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 }
 
 .App-link {

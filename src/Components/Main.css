@@ -7,7 +7,44 @@
   align-items: center;
 }
 
+.matrix-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .matrix-item {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 2em;
+  height: 2em;
+  margin: 2px;
+  border-radius: 4px;
+  background-color: #eee;
+  border: 1px solid #a2a2a2;
+}
+
+.solver-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.solver,
+.solver-ga,
+.solver-manual {
+  margin: 1em;
+  padding: 0.5em 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #eee;
+  box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.solver-manual {
+  background-color: #f6f8f5;
+  box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
 }
