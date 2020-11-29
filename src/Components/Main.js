@@ -41,12 +41,6 @@ const Main = () => {
   const computeWithGA = () => {
     let metaData = [];
     class CycleFinder extends Simulation {
-      // calculateFitness(individual, data) {
-      //   const cycle = solveCycle(matrix, individual.getDna(0));
-      //   console.log(cycle[0] === bestScore[0][0]);
-      //   const fitness = cycle.length / data.bestScore[1];
-      //   return fitness;
-      // }
       calculateFitness(individual, data) {
         const cycle = solveCycle(matrix, individual.getDna(0));
         let score = 0;
