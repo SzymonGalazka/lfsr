@@ -106,7 +106,7 @@ const Main = () => {
       <div className='solver-manual'>
         <h4>Longest cycle (computed manually)</h4>
         <div>Length: {bestScore[1]}</div>
-        <div>
+        <div className='solver-manual-cycle'>
           {bestScore[0].map((node, i) => (
             <p key={i}>
               {node} ({toDecimal(node.join(''))})
@@ -130,7 +130,7 @@ const Main = () => {
               <div>
                 Avg gen fitness ({(iteration.avgFitness / 1).toFixed(4)})
               </div>
-              <div>Seed: ({iteration.top.dna[0].genes})</div>
+              <div>Leading seed: ({iteration.top.dna[0].genes})</div>
 
               {i === gaData.length - 1 && (
                 <>
