@@ -18,12 +18,12 @@ const Main = () => {
   }, []);
 
   const matrix = [
-    [0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1],
     [0, 0, 1, 0, 0, 0],
     [0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 1, 1],
   ];
 
   const maxVal = toDecimal(matrix.map((row) => '1').join('')) + 1;
@@ -41,16 +41,25 @@ const Main = () => {
   const computeWithGA = () => {
     let metaData = [];
     class CycleFinder extends Simulation {
+      // calculateFitness(individual, data) {
+      //   const cycle = solveCycle(matrix, individual.getDna(0));
+      //   console.log(cycle[0] === bestScore[0][0]);
+      //   const fitness = cycle.length / data.bestScore[1];
+      //   return fitness;
+      // }
       calculateFitness(individual, data) {
         const cycle = solveCycle(matrix, individual.getDna(0));
-        const fitness = cycle.length / data.bestScore[1];
-        console.log('F -> ' + fitness);
+        let score = 0;
+        data.bestScore[0][0].forEach((gene, i) => {
+          if (gene === cycle[0][i]) ++score;
+        });
+        const fitness = score / data.bestScore[0][0].length;
         return fitness;
       }
-
       shouldFinish(top) {
-        if (top.fitness === 1) setGaData(metaData);
-        return top.fitness === 1;
+        const winCondition = top.fitness >= 1;
+        if (winCondition) setGaData(metaData);
+        return winCondition;
       }
     }
 
@@ -64,11 +73,11 @@ const Main = () => {
       prototype: binaryIndividual,
       data: { bestScore },
       mutationRate: 0.05,
-      popSize: 1,
-      numParents: 1000,
+      popSize: 10,
+      numParents: 5,
       maxGenerations: 100,
-      selection: genie.ga.Selection.stochasticUniversalSampling,
-      crossover: genie.ga.Crossover.uniform,
+      selection: genie.ga.Selection.rouletteWheel,
+      crossover: genie.ga.Crossover.singlePoint,
       onCalculateFitness(state) {
         metaData.push({
           avgFitness: state.averageFitness,
@@ -84,7 +93,7 @@ const Main = () => {
   };
 
   const bestScore = computeManually();
-
+  console.log(bestScore[0][0]);
   return (
     <div className='main'>
       <h2>Linear-feedback shift register</h2>
@@ -124,14 +133,23 @@ const Main = () => {
             >
               {console.log(iteration)}
               <h3>Generation #{iteration.gen}</h3>
-              <div>Longest cycle ({iteration.topCycle.length}):</div>
               <div>
-                {iteration.topCycle.map((node, i) => (
-                  <p key={i}>
-                    {node} ({toDecimal(node.join(''))})
-                  </p>
-                ))}
+                Avg gen fitness ({(iteration.avgFitness / 1).toFixed(4)})
               </div>
+              <div>Seed: ({iteration.top.dna[0].genes})</div>
+
+              {i === gaData.length - 1 && (
+                <>
+                  <div>Top cycle ({iteration.topCycle.length}):</div>
+                  <div>
+                    {iteration.topCycle.map((node, i) => (
+                      <p key={i}>
+                        {node} ({toDecimal(node.join(''))})
+                      </p>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>

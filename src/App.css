@@ -5,7 +5,7 @@
 }
 .App-footer {
   display: flex;
-  padding: 2em 1em;
+  padding: 1em;
   justify-content: space-around;
   position: sticky;
   bottom: 0;

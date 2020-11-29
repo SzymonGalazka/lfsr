@@ -28,13 +28,14 @@
 .solver-list {
   display: flex;
   flex-flow: row wrap;
+  align-items: flex-start;
 }
 
 .solver,
 .solver-ga,
 .solver-manual {
   margin: 1em;
-  padding: 0.5em 1.5em;
+  padding: 0.5em 1.5em 1.5em 1.5em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
